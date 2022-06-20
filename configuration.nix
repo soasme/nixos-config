@@ -4,10 +4,14 @@
 
 { config, pkgs, ... }:
 
+let
+  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
+in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      (import "${home-manager}/nixos")
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -15,12 +19,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "devbox"; # Define your hostname.
+
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
+  time.timeZone = "Pacific/Auckland";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -36,21 +43,6 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-  services.xserver = {
-    enable = true;
-
-    libinput = {
-      enable = true;
-    };
-
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-    };
-
-    displayManager.defaultSession = "xfce";
-  };
-
 
   # Configure keymap in X11
   # services.xserver.layout = "us";
@@ -78,13 +70,6 @@
   #     thunderbird
   #   ];
   # };
-  users.users."ju.lin" = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      home-manager
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -93,9 +78,7 @@
   #   wget
   # ];
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -115,12 +98,13 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [
-    8000 # This is for `python3 -mhttp.server`
-  ];
-
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.firewall.allowedTCPPorts = [
+    3000  # for regular node app
+    8000  # for regular web app
+    8080  # for regular web app
+  ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -135,5 +119,44 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-}
 
+  ## Extra customizations
+
+  ## Enable docker.
+  virtualisation.docker.enable = true;
+
+  ## Setup window environment.
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    dpi = 192;
+
+    desktopManager = {
+      xterm.enable = false;
+      wallpaper.mode = "fill";
+    };
+
+    displayManager = {
+      defaultSession = "none+i3";
+      lightdm.enable = true;
+    };
+
+    windowManager = {
+      i3.enable = true;
+      i3.extraPackages = with pkgs; [
+        dmenu
+        i3status
+        i3lock
+      ];
+    };
+  };
+
+  home-manager.users.root = import ./root-home.nix;
+
+  users.users.soasme = {
+    isNormalUser = true;
+    home = "/home/soasme";
+    extraGroups = ["wheel"];
+  };
+  home-manager.users.soasme = import ./home.nix;
+}
