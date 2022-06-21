@@ -23,4 +23,9 @@
       i3lock
     ];
   };
+
+  libinput = {
+    enable = true;
+    naturalScrolling = true;
+  };
 }
