@@ -180,6 +180,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       # `gcc`, `gc<motion>`: quick commenting.
       vimPlugins.vim-commentary
       vimPlugins.nvim-treesitter
+      vimPlugins.suda-vim
       # This enpowers autoformat for certain programming languages.
       {
         plugin = vimPlugins.neoformat;
