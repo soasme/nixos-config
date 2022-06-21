@@ -136,5 +136,5 @@ in
     home = "/home/soasme";
     extraGroups = ["wheel"];
   };
-  home-manager.users.soasme = import ./home.nix;
+  home-manager.users.soasme = import ./soasme-home.nix;
 }
