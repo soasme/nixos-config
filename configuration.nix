@@ -129,12 +129,16 @@ in
   ## Setup window environment.
   services.xserver = import ./xserver.nix { inherit pkgs; };
 
+  programs.zsh.enable = true;
+
   home-manager.users.root = import ./root-home.nix;
 
   users.users.soasme = {
     isNormalUser = true;
+    description = "soasme@gmail.com";
     home = "/home/soasme";
+    shell = pkgs.zsh;
     extraGroups = ["wheel"];
   };
-  home-manager.users.soasme = import ./soasme-home.nix;
+  home-manager.users.soasme = import ./soasme-home.nix { inherit pkgs; };
 }
