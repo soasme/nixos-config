@@ -148,4 +148,7 @@ in
     extraGroups = ["wheel"];
   };
   home-manager.users.soasme = import ./soasme-home.nix { inherit pkgs; };
+
+  users.users."ju.lin" = import ./julinwd-user.nix;
+  home-manager.users."ju.lin" = import ./julinwd-home.nix { inherit pkgs; };
 }
