@@ -79,6 +79,7 @@ in
   # ];
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    w3m # for web browsing.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -128,6 +129,9 @@ in
 
   ## Setup window environment.
   services.xserver = import ./xserver.nix { inherit pkgs; };
+
+  # The SPICE Guest Tool allows shared directory among host and UTM guest.
+  services.spice-vdagentd.enable = true;
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
