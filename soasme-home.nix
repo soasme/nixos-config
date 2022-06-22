@@ -18,6 +18,9 @@
     pkgs.python3
   ];
 
+  home.file.".bash_profile".text = ''
+exec zsh
+'';
   home.file.".profile".text = ''
 export PATH="$HOME/.nix-profile/bin:$PATH"
   '';

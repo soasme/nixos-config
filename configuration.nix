@@ -130,6 +130,7 @@ in
   services.xserver = import ./xserver.nix { inherit pkgs; };
 
   programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
 
   home-manager.users.root = import ./root-home.nix;
 
@@ -137,7 +138,6 @@ in
     isNormalUser = true;
     description = "soasme@gmail.com";
     home = "/home/soasme";
-    shell = pkgs.zsh;
     extraGroups = ["wheel"];
   };
   home-manager.users.soasme = import ./soasme-home.nix { inherit pkgs; };
