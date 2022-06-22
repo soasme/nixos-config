@@ -8,8 +8,6 @@
 
   home.packages = [
     pkgs.wget
-    pkgs.git
-    pkgs.python3
   ];
 
   xsession.windowManager.i3 = {

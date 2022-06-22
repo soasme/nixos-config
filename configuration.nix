@@ -78,8 +78,11 @@ in
   #   wget
   # ];
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    w3m # for web browsing.
+    vim       # why nano?
+    w3m       # for web browsing.
+    git       # for downloading repos.
+    git-crypt # for decrypt files. 
+    python3   # for basic automation.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
