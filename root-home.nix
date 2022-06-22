@@ -34,10 +34,7 @@
       plugins = [
         "git"
         "vi-mode"
-        "direnv"
-        "autojump"
         "docker"
-        "kubectl"
       ];
     };
   };
