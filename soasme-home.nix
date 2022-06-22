@@ -23,6 +23,7 @@ exec zsh
 '';
   home.file.".profile".text = ''
 export PATH="$HOME/.nix-profile/bin:$PATH"
+exec zsh
   '';
 
   xsession.windowManager.i3 = {
@@ -31,12 +32,18 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       startup = [
         { command = "xrandr --output Virtual-1 --mode 1920x1080 &"; always = true; }
       ];
-      terminal = "alacritty";
+      terminal = "alacritty"; 
     };
   };
 
   programs.alacritty = {
     enable = true;
+    settings = {
+      shell = {
+        program = "zsh";
+        args = ["--login"];
+      };
+    };
   };
 
   programs.home-manager.enable = true;
