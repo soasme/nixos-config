@@ -136,6 +136,8 @@ in
   # The SPICE Guest Tool allows shared directory among host and UTM guest.
   services.spice-vdagentd.enable = true;
 
+  programs.fuse.userAllowOther = true;
+
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
