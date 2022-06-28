@@ -2,17 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, home-manager, ... }:
 
-let
-  home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      (import "${home-manager}/nixos")
+      home-manager.nixosModule
     ];
+
+  nix.package = pkgs.nixFlakes;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
