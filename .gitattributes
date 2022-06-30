@@ -1,2 +1,0 @@
-julinwd-user.nix filter=git-crypt diff=git-crypt
-julinwd-home.nix filter=git-crypt diff=git-crypt
