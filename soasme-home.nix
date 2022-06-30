@@ -29,9 +29,6 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
         { command = "spice-vdagent &"; always = true; }
       ];
       terminal = "alacritty"; 
-      keybindings = {
-        "Mod1+d" = "exec --no-startup-id rofi -show run";
-      };
     };
   };
 

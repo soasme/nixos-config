@@ -89,6 +89,7 @@
     python3   # for basic automation.
     imagemagick # for displaying images.
     phodav    # for shared directory.
+    chromium  # for web browsing.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
