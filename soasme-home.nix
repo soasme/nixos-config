@@ -13,6 +13,8 @@
   home.packages = [
     pkgs.direnv
     pkgs.autojump
+    pkgs.ranger
+    pkgs.w3m
   ];
 
   home.file.".profile".text = ''

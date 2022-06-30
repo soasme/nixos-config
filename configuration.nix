@@ -89,6 +89,7 @@
     python3   # for basic automation.
     imagemagick # for displaying images.
     phodav    # for shared directory.
+    davfs2    # for mounting shared directory.
     chromium  # for web browsing.
   ];
 

@@ -5,6 +5,9 @@ running NixOS on UTM(QEMU).
 
 ## Getting Started
 
+
+[![Run NixOS on macOS using UTM](https://img.youtube.com/vi/8gytY4ITSDA/0.jpg)](https://www.youtube.com/watch?v=8gytY4ITSDA)
+
 Download minimal NixOS ISO image.
 
 In UTM, create a new VM using "Other" as system, and choose
@@ -40,4 +43,9 @@ Boot the VM and follow the instructions in
   * **Import Note**: Before running `reboot`, remove ISO in the UTM.
   * Reboot!
 
-After rebooting the OS, you can now use the NixOS.
+After rebooting the OS, you can now clone this repo and use the nixos-config:
+
+```
+$ git clone git@github.com:soasme/nixos-config.git
+$ sudo nixos-rebuild switch --flake '/home/soasme/nixos-config'
+```
