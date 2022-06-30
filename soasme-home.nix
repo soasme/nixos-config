@@ -26,7 +26,10 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     enable = true;
     config = {
       startup = [
-        { command = "xrandr --output Virtual-1 --mode 1920x1080 &"; always = true; }
+        # adjust resolution.
+        { command = "xrandr --output Virtual-1 --mode 1920x1200 &"; always = true; }
+        # enable copy-paste sharing with host.
+        { command = "spice-vdagent &"; always = true; }
       ];
       terminal = "alacritty"; 
     };

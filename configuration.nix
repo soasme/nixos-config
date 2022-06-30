@@ -12,6 +12,11 @@
     ];
 
   nix.package = pkgs.nixFlakes;
+  nix.extraOptions = ''
+    experimental-features = nix-command flakes
+  '';
+
+  nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -78,10 +83,10 @@
   # ];
   environment.systemPackages = with pkgs; [
     vim       # why nano?
-    w3m       # for web browsing.
     git       # for downloading repos.
-    git-crypt # for decrypt files. 
     python3   # for basic automation.
+    imagemagick # for displaying images.
+    phodav    # for shared directory.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -142,6 +147,8 @@
 
   home-manager.users.root = import ./root-home.nix;
 
+  security.sudo.wheelNeedsPassword = false;
+
   users.users.soasme = {
     isNormalUser = true;
     description = "soasme@gmail.com";
@@ -149,4 +156,5 @@
     extraGroups = ["wheel"];
   };
   home-manager.users.soasme = import ./soasme-home.nix { inherit pkgs; };
+
 }
