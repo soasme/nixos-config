@@ -11,11 +11,8 @@
   };
 
   home.packages = [
-    pkgs.fd
     pkgs.direnv
     pkgs.autojump
-    pkgs.wget
-    pkgs.python3
   ];
 
   home.file.".profile".text = ''
@@ -32,6 +29,9 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
         { command = "spice-vdagent &"; always = true; }
       ];
       terminal = "alacritty"; 
+      keybindings = {
+        "Mod1+d" = "exec --no-startup-id rofi -show run";
+      };
     };
   };
 
@@ -58,6 +58,9 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       co = "commit";
       ch = "checkout";
     };
+    extraConfig = {
+      safe.directory = ["/etc/nixos"];
+    };
   };
 
   programs.bat = {
@@ -66,6 +69,10 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       theme = "TwoDark";
       pager = "less -FR";
     };
+  };
+
+  programs.rofi = {
+    enable = true;
   };
 
   programs.zsh = {

@@ -83,6 +83,8 @@
   # ];
   environment.systemPackages = with pkgs; [
     vim       # why nano?
+    wget      # why curl?
+    fd        # why find?
     git       # for downloading repos.
     python3   # for basic automation.
     imagemagick # for displaying images.
