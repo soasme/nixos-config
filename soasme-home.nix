@@ -78,6 +78,9 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    sessionVariables = {
+      EDITOR = "vi";
+    };
     oh-my-zsh = {
       enable = true;
       theme = "random";
