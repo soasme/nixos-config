@@ -17,6 +17,7 @@
   '';
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnsupportedSystem = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -160,5 +161,18 @@
     extraGroups = ["wheel"];
   };
   home-manager.users.soasme = import ./soasme-home.nix { inherit pkgs; };
+
+
+  environment.variables.LIGBL_ALWAYS_SOFTWARE = "1";
+
+  systemd.services.spice-webdavd = {
+    wantedBy = [ "multi-user.target" ];
+    description = "Start spice-webdavd service";
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.phodav}/bin/spice-webdavd -p 9843";
+      Restart = "on-success";
+    };
+  };
 
 }
