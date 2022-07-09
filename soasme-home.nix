@@ -11,10 +11,15 @@
   };
 
   home.packages = [
+    pkgs.gnumake
+    pkgs.fd
+    pkgs.ripgrep
     pkgs.direnv
     pkgs.autojump
-    pkgs.ranger
-    pkgs.w3m
+    pkgs.jq
+    pkgs.rsync
+    pkgs.xclip
+    pkgs.hub
   ];
 
   home.file.".profile".text = ''
@@ -70,6 +75,11 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     };
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.rofi = {
     enable = true;
   };
@@ -86,6 +96,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       theme = "random";
       plugins = [
         "git"
+        "fzf"
         "vi-mode"
         "direnv"
         "autojump"
@@ -119,6 +130,17 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
         url =
           "https://github.com/folke/tokyonight.nvim/archive/8223c970677e4d88c9b6b6d81bda23daf11062bb.tar.gz";
         sha256 = "1rzg0h0ab3jsfrimdawh8vlxa6y3j3rmk57zyapnmzpzllcswj0i";
+      };
+    };
+    copilot-vim = pkgs.vimUtils.buildVimPlugin {
+      name = "copilot-vim";
+      buildPhase = ":";
+      src = pkgs.fetchFromGitHub {
+        owner = "github";
+        repo = "copilot.vim";
+        rev = "c2e75a3a7519c126c6fdb35984976df9ae13f564";
+        url = "https://github.com/github/copilot.vim/archive/c2e75a3a7519c126c6fdb35984976df9ae13f564.tar.gz";
+        sha256 = "0m65y0pvc7sdj2xc3r97nb5md1i0iqcyri6h83hvs88skrmwnpap";
       };
     };
     nvim-lualine-config = ''
@@ -175,6 +197,12 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       vim.g.tokyonight_italic_functions = true
       vim.cmd[[colorscheme tokyonight]]
     '';
+    coc-config = ''
+      let g:coc_global_extensions = ['coc-tabnine']
+      inoremap <silent><expr> <c-space> coc#refresh()
+      inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+      inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+    '';
   in {
     enable = true;
     viAlias = true;
@@ -216,6 +244,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 
       nvim-lualine
       nvim-tokyonight
+      copilot-vim
     ];
     extraConfig = ''
       lua <<EOF
@@ -224,7 +253,13 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       ${nvim-lualine-config}
 
       ${nvim-treesitter-config}
+
+      vim.api.nvim_set_option("clipboard","unnamed")
       EOF
+    '';
+    coc.enable = true;
+    coc.pluginConfig = ''
+      ${coc-config}
     '';
   };
 
