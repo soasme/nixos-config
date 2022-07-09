@@ -221,12 +221,22 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     plugins = with pkgs; [
       # Good support for nix files.
       vimPlugins.vim-nix
+
       # :Git :Gsplit, :Gedit, etc.
       vimPlugins.vim-fugitive
+
       # `gcc`, `gc<motion>`: quick commenting.
       vimPlugins.vim-commentary
+
+      # :Files, :Buffers, :Commits, etc.
+      vimPlugins.fzf-vim
+
+      # syntax highlight 
       vimPlugins.nvim-treesitter
+
+      # :SudaWrite, :SudaRead
       vimPlugins.suda-vim
+
       # This enpowers autoformat for certain programming languages.
       {
         plugin = vimPlugins.neoformat;
@@ -236,14 +246,20 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
 	  let g:neoformat_enabled_terraform = ["terraform"]
         '';
       }
+
       # This beautifies the startup scene for vim.
       {
         plugin = vimPlugins.vim-startify;
         config = "let g:startify_change_to_vcs_root = 0";
       }
 
+      # Put useful information at the bottom.
       nvim-lualine
+
+      # theme.
       nvim-tokyonight
+
+      # Hmm, I'm just a code reviewer, not a programmer now.
       copilot-vim
     ];
     extraConfig = ''
