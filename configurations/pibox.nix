@@ -2,12 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, home-manager, ... }:
+{ config, pkgs, lib, home-manager, nixos-hardware, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ../hardwares/pibox.nix
+      nixos-hardware.nixosModules.raspberry-pi-4
       home-manager.nixosModule
     ];
 
@@ -20,8 +21,8 @@
   nixpkgs.config.allowUnsupportedSystem = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
 
   # networking.hostName = "nixos"; # Define your hostname.
   networking.hostName = "pibox"; # Define your hostname.
@@ -133,6 +134,7 @@
 
 
   ## Extra customizations
+ 
 
   ## Enable docker.
   virtualisation.docker.enable = true;
@@ -156,4 +158,7 @@
   home-manager.users.soasme = import ../soasme-home.nix { inherit pkgs; };
 
   environment.variables.LIGBL_ALWAYS_SOFTWARE = "1";
+
+  hardware.raspberry-pi."4".fkms-3d.enable = true;
+  hardware.pulseaudio.enable = true;
 }
