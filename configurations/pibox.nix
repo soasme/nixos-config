@@ -161,4 +161,11 @@
 
   hardware.raspberry-pi."4".fkms-3d.enable = true;
   hardware.pulseaudio.enable = true;
+
+  # enabling bluetooth support
+  # <https://nixos.wiki/wiki/Bluetooth>
+  hardware.bluetooth.enable = true;
+
+  # pairing bluetooth devices.
+  services.blueman.enable = true;
 }
