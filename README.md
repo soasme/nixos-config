@@ -5,6 +5,14 @@ running NixOS on UTM(QEMU).
 
 ## Getting Started
 
+### Getting Started with Raspberry Pi
+
+```
+nixos-rebuild switch --flake github:soasme/nixos-config
+```
+
+### Getting Started with UTM
+
 
 [![Run NixOS on macOS using UTM](https://img.youtube.com/vi/8gytY4ITSDA/0.jpg)](https://www.youtube.com/watch?v=8gytY4ITSDA)
 
