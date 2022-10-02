@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ../hardwares/pibox.nix
       home-manager.nixosModule
     ];
 
