@@ -157,7 +157,7 @@
   };
   home-manager.users.soasme = import ../soasme-home.nix { inherit pkgs; };
 
-  environment.variables.LIGBL_ALWAYS_SOFTWARE = "1";
+  environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
   hardware.raspberry-pi."4".fkms-3d.enable = true;
   hardware.pulseaudio.enable = true;
