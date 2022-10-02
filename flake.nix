@@ -8,5 +8,10 @@
       specialArgs = attrs;
       modules = [ ./configuration.nix ];
     };
+    nixosConfigurations.pibox = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = attrs;
+      modules = [ ./configurations/pibox.nix ];
+    };
   };
 }
