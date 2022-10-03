@@ -5,6 +5,8 @@
   layout = "us";
   dpi = 192;
 
+  xkbOptions = "ctrl:swapcaps";
+
   desktopManager = {
     xterm.enable = false;
     wallpaper.mode = "fill";
