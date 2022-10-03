@@ -8,6 +8,7 @@
 
   home.shellAliases = {
     g = "git";
+    lock = "i3lock & sleep 3 && xset dpms force off";
   };
 
   home.packages = [
