@@ -108,42 +108,6 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
   };
 
   programs.neovim = let
-    # This specifies the source for building nvim-lualine plugin.
-    nvim-lualine = pkgs.vimUtils.buildVimPlugin {
-      name = "nvim-lualine";
-      buildPhase = ":";
-      src = pkgs.fetchFromGitHub {
-        owner = "nvim-lualine";
-        repo = "lualine.nvim";
-        rev = "3362b28f917acc37538b1047f187ff1b5645ecdd";
-        url =
-          "https://github.com/nvim-lualine/lualine.nvim/archive/3362b28f917acc37538b1047f187ff1b5645ecdd.tar.gz";
-        sha256 = "0pfkh7zhnwhbfdcild5vayymw4vqzcfb31nq1y33pk1zlvpwxksv";
-      };
-    };
-    nvim-tokyonight = pkgs.vimUtils.buildVimPlugin {
-      name = "nvim-tokyonight.nvim";
-      buildPhase = ":";
-      src = pkgs.fetchFromGitHub {
-        owner = "folke";
-        repo = "tokyonight.nvim";
-        rev = "8223c970677e4d88c9b6b6d81bda23daf11062bb";
-        url =
-          "https://github.com/folke/tokyonight.nvim/archive/8223c970677e4d88c9b6b6d81bda23daf11062bb.tar.gz";
-        sha256 = "1rzg0h0ab3jsfrimdawh8vlxa6y3j3rmk57zyapnmzpzllcswj0i";
-      };
-    };
-    copilot-vim = pkgs.vimUtils.buildVimPlugin {
-      name = "copilot-vim";
-      buildPhase = ":";
-      src = pkgs.fetchFromGitHub {
-        owner = "github";
-        repo = "copilot.vim";
-        rev = "c2e75a3a7519c126c6fdb35984976df9ae13f564";
-        url = "https://github.com/github/copilot.vim/archive/c2e75a3a7519c126c6fdb35984976df9ae13f564.tar.gz";
-        sha256 = "0m65y0pvc7sdj2xc3r97nb5md1i0iqcyri6h83hvs88skrmwnpap";
-      };
-    };
     nvim-lualine-config = ''
       require'lualine'.setup {
         options = {
@@ -238,6 +202,9 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       # :SudaWrite, :SudaRead
       vimPlugins.suda-vim
 
+      # Hmm, I'm just a code reviewer, not a programmer now.
+      vimPlugins.copilot-vim
+
       # This enpowers autoformat for certain programming languages.
       {
         plugin = vimPlugins.neoformat;
@@ -255,13 +222,10 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       }
 
       # Put useful information at the bottom.
-      nvim-lualine
+      vimPlugins.lualine-nvim
 
       # theme.
-      nvim-tokyonight
-
-      # Hmm, I'm just a code reviewer, not a programmer now.
-      copilot-vim
+      vimPlugins.tokyonight-nvim
     ];
     extraConfig = ''
       lua <<EOF
