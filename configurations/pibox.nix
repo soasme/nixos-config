@@ -159,13 +159,27 @@
 
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
+  hardware.opengl.enable = true;
+
   hardware.raspberry-pi."4".fkms-3d.enable = true;
+
+  # enable sound
+  sound.enable = true;
   hardware.pulseaudio.enable = true;
+  boot.loader.raspberryPi.firmwareConfig = ''
+    dtparam=audio=on
+  '';
 
   # enabling bluetooth support
   # <https://nixos.wiki/wiki/Bluetooth>
   hardware.bluetooth.enable = true;
 
+  # https://github.com/NixOS/nixpkgs/issues/123725
+  hardware.enableRedistributableFirmware = true;
+
   # pairing bluetooth devices.
   services.blueman.enable = true;
+
+  # https://nix-community.github.io/home-manager/index.html#_why_do_i_get_an_error_message_about_literal_ca_desrt_dconf_literal_or_literal_dconf_service_literal
+  programs.dconf.enable = true;
 }

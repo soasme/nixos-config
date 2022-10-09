@@ -21,6 +21,7 @@
     pkgs.rsync
     pkgs.xclip
     pkgs.hub
+    pkgs.obs-studio
   ];
 
   home.file.".profile".text = ''
