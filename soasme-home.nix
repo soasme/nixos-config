@@ -239,10 +239,6 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
       vim.api.nvim_set_option("clipboard","unnamed")
       EOF
     '';
-    coc.enable = true;
-    coc.pluginConfig = ''
-      ${coc-config}
-    '';
   };
 
 
