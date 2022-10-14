@@ -2,6 +2,7 @@
   inputs.nixpkgs.url = github:NixOS/nixpkgs;
   inputs.home-manager.url = github:nix-community/home-manager;
   inputs.nixos-hardware.url = github:NixOS/nixos-hardware;
+  inputs.neovim-config.url = "path:./modules/neovim";
 
   outputs = { self, nixpkgs, ... }@attrs: {
     nixosConfigurations.devbox = nixpkgs.lib.nixosSystem {

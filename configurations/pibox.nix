@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, home-manager, nixos-hardware, ... }:
+{ config, pkgs, lib, home-manager, nixos-hardware, neovim-config, ... }:
 
 {
   imports =
@@ -155,7 +155,7 @@
     home = "/home/soasme";
     extraGroups = ["wheel"];
   };
-  home-manager.users.soasme = import ../soasme-home.nix { inherit pkgs; };
+  home-manager.users.soasme = import ../soasme-home.nix { inherit pkgs neovim-config; };
 
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
