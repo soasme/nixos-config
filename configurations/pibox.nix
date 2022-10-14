@@ -157,7 +157,7 @@
     nvim-config = import ../modules/nvim-config.nix { inherit pkgs; };
     zsh-config = import ../modules/zsh-config.nix;
     git-config = import ../modules/git-config.nix;
-  in import ../soasme-home.nix {
+  in import ../homes/soasme.nix {
     inherit pkgs nvim-config zsh-config git-config;
   };
 
