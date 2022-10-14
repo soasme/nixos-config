@@ -1,4 +1,4 @@
-{ pkgs, neovim-config, ... }:
+{ pkgs, zsh-config, nvim-config, ... }:
 
 {
   home.username = "soasme";
@@ -86,28 +86,8 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     enable = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableCompletion = true;
-    sessionVariables = {
-      EDITOR = "vi";
-    };
-    oh-my-zsh = {
-      enable = true;
-      theme = "random";
-      plugins = [
-        "git"
-        "fzf"
-        "vi-mode"
-        "direnv"
-        "autojump"
-        "docker"
-        "kubectl"
-      ];
-    };
-  };
+  programs.zsh = zsh-config;
 
-  programs.neovim = neovim-config;
+  programs.neovim = nvim-config;
 
 }

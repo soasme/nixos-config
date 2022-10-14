@@ -155,7 +155,12 @@
     home = "/home/soasme";
     extraGroups = ["wheel"];
   };
-  home-manager.users.soasme = import ../soasme-home.nix { inherit pkgs neovim-config; };
+
+  home-manager.users.soasme = let
+    nvim-config = import ../modules/nvim-config.nix { inherit pkgs; };
+    zsh-config = import ../modules/zsh-config.nix { };
+  in 
+    import ../soasme-home.nix { inherit pkgs nvim-config zsh-config; };
 
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
