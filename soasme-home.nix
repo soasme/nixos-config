@@ -1,14 +1,16 @@
-{ pkgs, zsh-config, nvim-config, ... }:
+{ pkgs, zsh-config, nvim-config, git-config, ... }:
 
-{
-  home.username = "soasme";
-  home.homeDirectory = "/home/soasme";
-
+let
+  username = "soasme";
+in {
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
   home.stateVersion = "22.05";
 
   home.shellAliases = {
     g = "git";
-    lock = "i3lock & sleep 3 && xset dpms force off";
+    screensaver = "xset dpms force off";
+    lock = "i3lock & sleep 3 && screensaver";
   };
 
   home.packages = [
@@ -25,7 +27,7 @@
   ];
 
   home.file.".profile".text = ''
-export PATH="$HOME/.nix-profile/bin:$PATH"
+    export PATH="$HOME/.nix-profile/bin:$PATH"
   '';
 
   xsession.windowManager.i3 = {
@@ -37,7 +39,7 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
         # enable copy-paste sharing with host.
         # { command = "spice-vdagent &"; always = true; }
       ];
-      terminal = "alacritty"; 
+      terminal = "alacritty";
     };
   };
 
@@ -46,28 +48,12 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     settings = {
       shell = {
         program = "zsh";
-        args = ["--login"];
+        args = [ "--login" ];
       };
     };
   };
 
   programs.home-manager.enable = true;
-
-  programs.git = {
-    enable = true;
-    userName = "soasme";
-    userEmail = "soasme@gmail.com";
-    aliases = {
-      s = "status";
-      sc = "status --cached";
-      cp = "cherry-pick";
-      co = "commit";
-      ch = "checkout";
-    };
-    extraConfig = {
-      safe.directory = ["/etc/nixos"];
-    };
-  };
 
   programs.bat = {
     enable = true;
@@ -82,12 +68,10 @@ export PATH="$HOME/.nix-profile/bin:$PATH"
     enableZshIntegration = true;
   };
 
-  programs.rofi = {
-    enable = true;
-  };
+  programs.rofi = { enable = true; };
 
+  programs.git = git-config;
   programs.zsh = zsh-config;
-
   programs.neovim = nvim-config;
 
 }

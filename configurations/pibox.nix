@@ -5,12 +5,11 @@
 { config, pkgs, lib, home-manager, nixos-hardware, neovim-config, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ../hardwares/pibox.nix
-      nixos-hardware.nixosModules.raspberry-pi-4
-      home-manager.nixosModule
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ../hardwares/pibox.nix
+    nixos-hardware.nixosModules.raspberry-pi-4
+    home-manager.nixosModule
+  ];
 
   nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
@@ -84,13 +83,13 @@
   #   wget
   # ];
   environment.systemPackages = with pkgs; [
-    vim       # why nano?
-    wget      # why curl?
-    fd        # why find?
-    git       # for downloading repos.
-    python3   # for basic automation.
+    vim # why nano?
+    wget # why curl?
+    fd # why find?
+    git # for downloading repos.
+    python3 # for basic automation.
     imagemagick # for displaying images.
-    chromium  # for web browsing.
+    chromium # for web browsing.
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -114,9 +113,9 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   networking.firewall.allowedTCPPorts = [
-    3000  # for regular node app
-    8000  # for regular web app
-    8080  # for regular web app
+    3000 # for regular node app
+    8000 # for regular web app
+    8080 # for regular web app
   ];
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -132,9 +131,7 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 
-
   ## Extra customizations
- 
 
   ## Enable docker.
   virtualisation.docker.enable = true;
@@ -153,14 +150,16 @@
     isNormalUser = true;
     description = "soasme@gmail.com";
     home = "/home/soasme";
-    extraGroups = ["wheel"];
+    extraGroups = [ "wheel" ];
   };
 
   home-manager.users.soasme = let
     nvim-config = import ../modules/nvim-config.nix { inherit pkgs; };
-    zsh-config = import ../modules/zsh-config.nix { };
-  in 
-    import ../soasme-home.nix { inherit pkgs nvim-config zsh-config; };
+    zsh-config = import ../modules/zsh-config.nix;
+    git-config = import ../modules/git-config.nix;
+  in import ../soasme-home.nix {
+    inherit pkgs nvim-config zsh-config git-config;
+  };
 
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
