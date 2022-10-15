@@ -137,7 +137,7 @@
   virtualisation.docker.enable = true;
 
   ## Setup window environment.
-  services.xserver = import ../xserver.nix { inherit pkgs; };
+  services.xserver = import ../modules/xserver.nix { inherit pkgs; };
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;

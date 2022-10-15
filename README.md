@@ -1,7 +1,7 @@
 # NixOS on UTM
 
-This repository contains configurations & scripts that allows
-running NixOS on UTM(QEMU).
+This repository contains NIX configurations for @soasme's personal use,
+including running NixOS on UTM(QEMU) and Raspberry Pi (4+).
 
 ## Getting Started
 
