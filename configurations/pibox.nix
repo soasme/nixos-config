@@ -162,6 +162,7 @@
   };
 
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
+  environment.variables.GDK_SCALE="1";
 
   hardware.opengl.enable = true;
 

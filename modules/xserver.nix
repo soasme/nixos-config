@@ -3,7 +3,7 @@
 {
   enable = true;
   layout = "us";
-  dpi = 192;
+  dpi = 120;
 
   xkbOptions = "ctrl:swapcaps";
 
