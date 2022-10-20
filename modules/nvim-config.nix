@@ -40,7 +40,7 @@ let
   '';
   nvim-treesitter-config = ''
     require'nvim-treesitter.configs'.setup {
-      ensure_installed = {"lua", "rust", "python", "javascript", "hcl", "vim"},
+      ensure_installed = {"lua", "rust", "python", "javascript", "hcl", "vim", "zig"},
       sync_install = false,
       highlight = {
         enable = true,
@@ -99,6 +99,7 @@ in {
         let g:neoformat_enabled_nix = ["nixfmt"]
         let g:neoformat_enabled_python = ["black"]
         let g:neoformat_enabled_terraform = ["terraform"]
+        let g:neoformat_enabled_zig = ["zig"]
       '';
     }
 
