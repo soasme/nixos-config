@@ -24,6 +24,7 @@ in {
     pkgs.xclip
     pkgs.hub
     pkgs.obs-studio
+    pkgs.keepassxc
   ];
 
   home.file.".profile".text = ''
@@ -39,7 +40,25 @@ in {
         # enable copy-paste sharing with host.
         # { command = "spice-vdagent &"; always = true; }
       ];
-      terminal = "alacritty";
+      terminal = "terminator";
+    };
+  };
+
+  programs.terminator = {
+    enable = true;
+    config = {
+      global_config = {
+        copy_on_select = true;
+        cursor_blink = true;
+        cursor_shape = "block";
+        font = "Monospace 10";
+        scrollback_infinite = true;
+        show_titlebar = false;
+        title_align = "left";
+        title_style = "normal";
+        use_system_font = false;
+        title_transmit_bg_color = "#1f2335";
+      };
     };
   };
 
