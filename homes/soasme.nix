@@ -24,6 +24,7 @@ in {
     pkgs.xclip
     pkgs.hub
     pkgs.obs-studio
+    pkgs.vlc
     pkgs.keepassxc
   ];
 
